@@ -44,3 +44,15 @@ Feel free to connect with me on [LinkedIn](https://linkedin.com/in/vilmapato) or
 
 This repo is submitted to **Superteam** as proof of task completion for the School of Solana Bootcamp.  
 All tasks are complete, tested, and public.
+
+## 🙏 Acknowledgements
+
+I want to thank the incredible team behind the **School of Solana Bootcamp**, especially:
+
+- \*_Ackee Blockchain_ team for organizing and supporting us during the past months.
+- The **Solana developer community** and all fellow participants who helped debug, shared insights, and built alongside me
+- Everyone contributing to Solana’s open-source tooling that made development accessible and fun
+
+This experience not only strengthened my Solana and Rust skills but also gave me the confidence to build and ship in the ecosystem.
+
+> _Built with ☕, test errors, and love. See you on-chain._ ✨
