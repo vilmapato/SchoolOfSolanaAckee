@@ -1,0 +1,345 @@
+{
+  "address": "PeDwUBNTDfe2osM61XLn3AsMyUm1LDGA7iB4Q2MRzgX",
+  "metadata": {
+    "name": "findingmymaid",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "create_job",
+      "discriminator": [178, 130, 217, 110, 100, 27, 82, 119],
+      "accounts": [
+        {
+          "name": "client",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "cleaner"
+        },
+        {
+          "name": "job",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [106, 111, 98]
+              },
+              {
+                "kind": "account",
+                "path": "client"
+              },
+              {
+                "kind": "account",
+                "path": "cleaner"
+              },
+              {
+                "kind": "arg",
+                "path": "date"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "location",
+          "type": "string"
+        },
+        {
+          "name": "date",
+          "type": "string"
+        },
+        {
+          "name": "duration",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "register_cleaner",
+      "discriminator": [109, 109, 118, 88, 159, 143, 92, 183],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "cleaner",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [99, 108, 101, 97, 110, 101, 114]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "location",
+          "type": "string"
+        },
+        {
+          "name": "hourly_rate",
+          "type": "u64"
+        },
+        {
+          "name": "is_available",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "register_client",
+      "discriminator": [106, 3, 23, 249, 136, 114, 145, 145],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "client",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [99, 108, 105, 101, 110, 116]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "update_cleaner",
+      "discriminator": [45, 49, 20, 130, 182, 236, 249, 96],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": ["cleaner"]
+        },
+        {
+          "name": "cleaner",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [99, 108, 101, 97, 110, 101, 114]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "new_location",
+          "type": "string"
+        },
+        {
+          "name": "new_rate",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Cleaner",
+      "discriminator": [138, 20, 29, 119, 74, 178, 24, 174]
+    },
+    {
+      "name": "Client",
+      "discriminator": [221, 237, 145, 143, 170, 194, 133, 115]
+    },
+    {
+      "name": "Job",
+      "discriminator": [75, 124, 80, 203, 161, 180, 202, 80]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "AlreadyRegistered",
+      "msg": "Cleaner already registered."
+    },
+    {
+      "code": 6001,
+      "name": "ClientAlreadyRegistered",
+      "msg": "Client already registered."
+    },
+    {
+      "code": 6002,
+      "name": "CleanerNotFound",
+      "msg": "Cleaner not found."
+    },
+    {
+      "code": 6003,
+      "name": "ClientNotFound",
+      "msg": "Client not found."
+    },
+    {
+      "code": 6004,
+      "name": "JobNotFound",
+      "msg": "Job not found."
+    },
+    {
+      "code": 6005,
+      "name": "Unauthorized",
+      "msg": "Unauthorized action."
+    },
+    {
+      "code": 6006,
+      "name": "InvalidCleaner",
+      "msg": "Cleaner is invalid or not registered."
+    },
+    {
+      "code": 6007,
+      "name": "CleanerUnavailable",
+      "msg": "Cleaner is not available."
+    }
+  ],
+  "types": [
+    {
+      "name": "Cleaner",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "name": "hourly_rate",
+            "type": "u64"
+          },
+          {
+            "name": "is_available",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Client",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "review",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Job",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "client",
+            "type": "pubkey"
+          },
+          {
+            "name": "cleaner",
+            "type": "pubkey"
+          },
+          {
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "type": "string"
+          },
+          {
+            "name": "duration",
+            "type": "u8"
+          },
+          {
+            "name": "total_cost",
+            "type": "u64"
+          },
+          {
+            "name": "completed",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}
